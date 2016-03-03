@@ -1,101 +1,94 @@
+
 var game = {
-  moves: ["X", "O", "X", "O", "X", "O", "X", "O", "X"],
+  movesX: ["X", "O", "X", "O", "X", "O", "X", "O", "X"],
+  movesO: ["O", "X", "O", "X", "O", "X", "O", "X", "O"],
   numMoves: 0,
-  tiles: ["#tile1","#tile2","#tile3","#tile4","#tile5","#tile6","#tile7","#tile8","#tile9"]
+  rows: [[$("#tile1"),$("#tile2"),$("#tile3")],[$("#tile4"),$("#tile5"),$("#tile6")],[$("#tile7"),$("#tile8"),$("#tile9")]],
+  cols: [[$("#tile1"),$("#tile4"),$("#tile7")],[$("#tile2"),$("#tile5"),$("#tile8")],[$("#tile3"),$("#tile6"),$("#tile9")]],
+  diags: [[$("#tile1"),$("#tile5"),$("#tile9")],[$("#tile3"),$("#tile5"),$("#tile7")]],
+  tile1: $("#tile1"),
+  tile2: $("#tile2"),
+  tile3: $("#tile3"),
+  tile4: $("#tile4"),
+  tile5: $("#tile5"),
+  tile6: $("#tile6"),
+  tile7: $("#tile7"),
+  tile8: $("#tile8"),
+  tile9: $("#tile9")
 };
 
-$('document').ready(function(){
+Array.prototype.allValuesSame = function(){
+    for(var i = 0; i < this.length; i++){
+        if(this[i].html() !== this[0].html())
+            return false;
+    }return true;
+};
 
-  $("#tile1").on("click", function(){
-    $(this).removeClass("open").addClass("taken");
-    $(this).html(game.moves.shift());
-    console.log("This: " + this);
-    console.log(game.moves.shift);
-    game.numMoves++;
-    console.log(game.numMoves);
-  }
-);
 
-$("#tile2").on("click", function(){
+// this lets the player make moves
+
+$(".tile.open").on("click", function(){
   $(this).removeClass("open").addClass("taken");
-  $(this).html(game.moves.shift());
-  console.log(this);
+  $(this).html(game.movesX.shift());
+  // console.log("Returning this html: " + this.html);
+  game.numMoves++;
+  // console.log("Number of moves " + game.numMoves);
+  isWinner();
 }
 );
 
-$("#tile3").on("click", function(){
-  $(this).removeClass("open").addClass("taken");
-  $(this).html(game.moves.shift());
-  console.log(this);
-}
-);
+// this clears the board and starts a new game
 
-$("#tile4").on("click", function(){
-  $(this).removeClass("open").addClass("taken");
-  $(this).html(game.moves.shift());
-  console.log(this);
-}
-);
-
-$("#tile5").on("click", function(){
-  $(this).removeClass("open").addClass("taken");
-  $(this).html(game.moves.shift());
-  console.log(this);
-}
-);
-
-$("#tile6").on("click", function(){
-  $(this).removeClass("open").addClass("taken");
-  $(this).html(game.moves.shift());
-  console.log(this);
-}
-);
-
-$("#tile7").on("click", function(){
-  $(this).removeClass("open").addClass("taken");
-  $(this).html(game.moves.shift());
-  console.log(this);
-}
-);
-
-$("#tile8").on("click", function(){
-  $(this).removeClass("open").addClass("taken");
-  $(this).html(game.moves.shift());
-  console.log(this);
-}
-);
-
-$("#tile9").on("click", function(){
-  $(this).removeClass("open").addClass("taken");
-  $(this).html(game.moves.shift());
-  console.log(this);
-}
-);
-
-$("#startBtn").on("click", clearBoard);
+$(".startBtn").on("click", clearBoard);
 
 function clearBoard(){
-  for(var i = 0; i <= game.tiles.length; i++){
+  for(var i = 0; i <= 9; i++){
     $(".taken").removeClass("taken").addClass("open");
     $("div.open").html("");
-    game.moves = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
+    game.movesX = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
+    game.movesO = ["O", "X", "O", "X", "O", "X", "O", "X", "O"];
+    numMoves = 0;
   }
 }
 
-});
 
-// var tile = $('<div></div>')
-// .hide()
-// .append($('<table></table>')
-//     .attr({ cellSpacing : 0 })
-//     .addClass("text")
+// ((game.rows[0][0].html() !== "") (game.rows[0][1].html() !== "") && (game.rows[0][2].html() !== "") && (game.rows[0][0].html() === game.rows[0][1].html()) && (game.rows[0][1].html() === game.rows[0][2].html()))
 
-// this makes sure the completed grid is removed at the end of a game
-// function buildGrid(){
-//     var parentDiv = $("#grid");
-//     for (var i = 0; i <= 9; i++){
-//       var tile = $("#grid").append($("<div></div>")).addClass("open");
-//       tile.id = "tile" + i;
-//       $("#grid").append(tile);
-//     }
-//   }
+function isWinner(){
+  if((game.tile1.html() !== "") && (game.tile2.html() !== "") && (game.tile3.html() !== "") && game.tile1.html() == game.tile2.html() && game.tile2.html() == game.tile3.html()){
+    console.log(game.tile1.html() + " is the winner!");
+  }
+}
+
+  // if(game.rows.forEach(allValuesSame) == true){
+  //   console.log("There is a winner!");
+  // }
+  // if((game.rows[0][0].html() === game.rows[0][1].html()) && (game.rows[0][1].html() === game.rows[0][2].html()) !== ""){
+  //   console.log(game.rows[0][0].html() + " is the winner!");
+  // }else if((game.tile4.html() !== null) && (game.tile5.html() !== null) && (game.tile6.html() !== null) && (game.tile4.html() === game.tile5.html()) && (game.tile5.html() === game.tile6.html())){
+  //   console.log(game.rows[1][0].html() + " is the winner!");
+  // }else if((game.tile8 !== null) && (game.tile9 !== null) && (game.tile7.html() === game.tile8.html()) && (game.tile8.html() === game.tile9.html()) && (game.tile7.html() !== null)){
+  //   console.log(game.rows[2][0].html() + " is the winner!");
+  // }
+
+
+
+function winsRow(){
+  for(var i = 0; i < game.rows.length; i++){
+    var row = game.rows[i];
+    for (var j = 0; j < row.length; j++){
+      var self = this;
+      if(game.rows[i][0].html() != self[j][0].html());
+      console.log("No winners here");
+      return false;
+    }console.log("Winner winner chicken dinner");
+    return true;
+  }
+}
+
+
+
+
+// add an option to play as Xs or Os
+// add players
+// add class color change for taken
