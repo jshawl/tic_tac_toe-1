@@ -78,6 +78,7 @@ function clearBoard(){
   for(var i = 0; i <= game.tiles.length; i++){
     $(".taken").removeClass("taken").addClass("open");
     $("div.open").html("");
+    game.moves = ["X", "O", "X", "O", "X", "O", "X", "O", "X"];
   }
 }
 
