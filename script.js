@@ -1,12 +1,12 @@
 var game = {
   moves: ["X", "O", "X", "O", "X", "O", "X", "O", "X"],
   numMoves: 0,
-  tiles: []
+  tiles: ["#tile1","#tile2","#tile3","#tile4","#tile5","#tile6","#tile7","#tile8","#tile9"]
 };
 
 $('document').ready(function(){
 
-$("#tile1").on("click", function(){
+  $("#tile1").on("click", function(){
     $(this).removeClass("open").addClass("taken");
     $(this).html(game.moves.shift());
     console.log("This: " + this);
@@ -72,7 +72,14 @@ $("#tile9").on("click", function(){
 }
 );
 
+$("#startBtn").on("click", clearBoard);
 
+function clearBoard(){
+  for(var i = 0; i <= game.tiles.length; i++){
+    $(".taken").removeClass("taken").addClass("open");
+    $("div.open").html("");
+  }
+}
 
 });
 
