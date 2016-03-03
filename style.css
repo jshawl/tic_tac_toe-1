@@ -1,0 +1,47 @@
+body {
+  background-color: white;
+  font-size: 60px;
+  font-family: sans-serif;
+}
+
+#container {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#startBtn {
+  background-color: #9435f2;
+  border: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: white;
+  padding: 10px 30px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  display: flex;
+  text-align: center;
+}
+
+div#grid{
+	margin: 0px auto;
+  width: 400px;
+}
+
+
+div#grid > div{
+	background: white no-repeat center;
+	border:#7800ff 1px solid;
+	width:70px;
+	height:70px;
+	float:left;
+	margin:10px;
+	padding:20px;
+	cursor:pointer;
+	text-align:center;
+  border-radius: 5px;
+  opacity: 1.0;
+}
