@@ -13,11 +13,17 @@ var game = {
   tile8: $("#tile8"),
   tile9: $("#tile9"),
   row1: [$("#tile1").html(),$("#tile2").html(),$("#tile3").html()],
+  // maybe instead of getting the values when this object is created (page load)
+  // you can have your row array reference the above variables, e.g.
+  // [this.tile1, this.tile2, etc...]
   row2: [$("#tile4").html(),$("#tile5").html(),$("#tile6").html()],
   row3: [$("#tile7").html(),$("#tile8").html(),$("#tile9").html()]
 };
 
 Array.prototype.allValuesSame = function(){
+  // consider creating a function instead of modifying prototype of built
+  // in data type. reason being... most array elements don't have `.html`
+  // method referenced below.
   for(var i = 0; i < this.length; i++){
     if(this[i].html() !== this[0].html())
     return false;
@@ -29,11 +35,12 @@ Array.prototype.allValuesSame = function(){
 
 $(".tile.open").on("click", function(){
   $(this).removeClass("open").addClass("taken");
-  $(this).html(game.movesX.shift());
+  $(this).html(game.movesX.shift()); // this is an interesting way to change whose turn it is!
+  // maybe instead you could have a `turn` attribute on game object.
   // console.log("Returning this html: " + this.html);
   game.numMoves++;
   // console.log("Number of moves " + game.numMoves);
-  return (winsRow() ||  winsCol() || winsDiag());
+  return (winsRow() ||  winsCol() || winsDiag()); // nice!
 }
 );
 
